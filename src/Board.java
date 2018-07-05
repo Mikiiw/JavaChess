@@ -39,7 +39,10 @@ public class Board {
 	}
 	
 	public void setupBoard(){
-		
+		/*
+		 * Setting up the board to the default setup
+		 * 
+		 */
 		for ( int i = 0; i < 8; i++ )
 			for ( int j = 0; j < 8; j++ ){
 				if (i == 1){
