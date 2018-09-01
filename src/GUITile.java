@@ -15,30 +15,12 @@ import Enums.Piece_Rank;
 public class GUITile extends JPanel{
 	
 	public boolean isOccupied = false;
-	public Colour p_colour;
 	public JLabel pic1 = new JLabel();
 
 	public GUITile(){
 		
-		this.setBorder(new LineBorder(Color.black, 2));
+//		this.setBorder(new LineBorder(Color.black, 2));
 
-		addMouseListener(new MouseAdapter(){
-			
-			Color background;
-			
-			 public void mousePressed(MouseEvent e) {
-				 if(isOccupied){
-					 background = getBackground();
-					 setBackground(Color.RED);
-					 repaint();
-					 }
-				 }
-
-	            @Override
-	            public void mouseReleased(MouseEvent e) {
-	                //setBackground(background);
-	            }
-		});		
 	}
 	
 	public void addPiece(Piece_Rank rank, Colour colour){
@@ -49,11 +31,11 @@ public class GUITile extends JPanel{
 	    	case BISHOP:
 	    		pic1.setIcon(new ImageIcon("img/bishop_white.png"));
 	    		break;
-	    		case EMPTY:
-	    			isOccupied = false;
-	    			break;
-	    			case KING:
-	    				pic1.setIcon(new ImageIcon("img/king_white.png"));
+	    	case EMPTY:
+	    		isOccupied = false;
+	    		break;
+	    	case KING:
+	    		pic1.setIcon(new ImageIcon("img/king_white.png"));
 				break;
 				case KNIGHT:
 			    pic1.setIcon(new ImageIcon("img/knight_white.png"));
@@ -101,7 +83,26 @@ public class GUITile extends JPanel{
 					break;
 			    }
 	    }
-	    this.add(pic1);
-		
+	    this.add(pic1);		
+	}
+	
+	public void removePiece(){
+		this.removeAll();
+		this.isOccupied = false;
+	}
+	
+	public void tileClicked(){
+		if(isOccupied){
+			this.setBackground(Color.GREEN);
+			System.out.println("Tile is occupied");
+		}
+	}
+	
+	public void availableMovePath(){
+		this.setBackground(Color.RED);
+	}
+	
+	public boolean getOccupied(){
+		return isOccupied;
 	}
 }
