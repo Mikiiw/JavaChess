@@ -18,11 +18,11 @@ public class GUITile extends JPanel{
 	public JLabel pic1 = new JLabel();
 
 	public GUITile(){
-		
-//		this.setBorder(new LineBorder(Color.black, 2));
-
+	//	this.setBorder(new LineBorder(Color.black, 2));
 	}
-	
+	/*
+	 * Adds a piece onto the user interface
+	 */
 	public void addPiece(Piece_Rank rank, Colour colour){
 	    isOccupied = true;
 	    

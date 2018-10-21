@@ -24,7 +24,11 @@ public class Pawn implements Piece {
 	public Piece_Rank getRank() {
 		return rank;
 	}
-	
+	/*
+	 * Get the Legal Moves of the Piece
+	 * @x position
+	 * @y position
+	 */
 	public ArrayList<String> getLegalMoves(int x, int y, Piece[][] boardPosition){
 		System.out.println("X is " + x + " Y is " + y);
 		ArrayList<String> legalMoves = new ArrayList<String>();

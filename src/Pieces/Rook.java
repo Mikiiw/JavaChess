@@ -13,18 +13,15 @@ public class Rook implements Piece{
 		return p_colour;
 	}
 
-	@Override
 	public void setColour(Colour p_colour) {
 		this.p_colour = p_colour;
 		
 	}
 
-	@Override
 	public Piece_Rank getRank() {
 		return rank;
 	}
 
-	@Override
 	public ArrayList<String> getLegalMoves(int x, int y, Piece[][] boardPosition) {
 		System.out.println("X is " + x + " Y is " + y);
 		ArrayList<String> legalMoves = new ArrayList<String>();

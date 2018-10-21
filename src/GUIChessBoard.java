@@ -28,13 +28,14 @@ public class GUIChessBoard extends JPanel{
 	public Image img;
 	public GUITile[][] tileList = new GUITile[8][8];
 	public BoardLogic Chessboard = new BoardLogic();
-	public String state = "unclicked";
+	public String clickedState = "unclicked";
+	public String menuState = "play";
 	
 	public int lastClicked_x, lastClicked_y;
 	public Piece lastClicked_Piece;
 	
 	public GUIChessBoard(){
-		System.out.println("Board GUI is being setup");		
+		System.out.println("Board GUI is being setup");	
 				
 		this.setLayout(new GridLayout(8, 8));
 		for(int i = 0; i < 8; i++)
@@ -43,10 +44,13 @@ public class GUIChessBoard extends JPanel{
 		}	
 		
 		this.resetGridColour();
+		
+		for(int i = 7; i >= 0; i--)
+			for(int j = 0; j < 8; j++){
+				this.add(tileList[j][i]);
+			}
 
 		Chessboard.setupBoard();
-		
-//		Chessboard.setPiece(0, 4, Piece_Rank.KING, Colour.WHITE);
 		
 		for ( int i = 0; i < 8; i++ )
 			for ( int j = 0; j < 8; j++ ){
@@ -57,21 +61,17 @@ public class GUIChessBoard extends JPanel{
 				}else
 					tileList[i][j].addPiece(Piece_Rank.EMPTY, Colour.WHITE);
 			}	
-	    
-        this.setVisible(true);
         
 
 		this.addMouseListener(new MouseAdapter(){
-			Color background;
-			
-			 public void mousePressed(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				 //System.out.println(e.getX() + " " + e.getY());
 				 //fix this
 				 int pos_x = (e.getX() / 70);
 				 int pos_y = 7 - ((e.getY() / 70)) ;
 				 tileList[pos_x][pos_y].tileClicked();
 				 
-				 switch (state){
+				 switch (clickedState){
 				 case "unclicked":
 					 // System.out.println(pos_x + " " + pos_y);
 					 
@@ -83,7 +83,7 @@ public class GUIChessBoard extends JPanel{
 						 System.out.println("New Piece Clicked");
 						 ArrayList<String> legalMoves = Chessboard.getLegalMoves(pos_x, pos_y);
 						 System.out.println("Available moves: " + legalMoves.size());
-						 state = "clicked";
+						 clickedState = "clicked";
 						 for(int i = 0; i < legalMoves.size(); i++){
 							 tileList[Integer.parseInt(legalMoves.get(i).substring(0, 1))][Integer.parseInt(legalMoves.get(i).substring(1, 2))].availableMovePath();
 							 }
@@ -102,10 +102,10 @@ public class GUIChessBoard extends JPanel{
 					 }else{
 						 resetGridColour();
 					 }
-					 state = "unclicked";
+					 clickedState = "unclicked";
 					 break;
 				 }
-				 System.out.println("Mouse state is: " + state);
+				 System.out.println("Mouse state is: " + clickedState);
 				 }
 
 	            @Override
@@ -129,8 +129,11 @@ public class GUIChessBoard extends JPanel{
 			}else{
 				tileList[j][i].setBackground(Color.WHITE);
 			}
-			this.add(tileList[j][i]);
 		}		
+	}
+	
+	public Piece getClicked(){
+		return lastClicked_Piece;
 	}
 	
 	

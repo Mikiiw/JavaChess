@@ -20,9 +20,9 @@ public class BoardLogic {
 	
 	
 	public void setPiece(int pos_x, int pos_y, Piece_Rank rank, Colour p_Colour){
-		/*
-		 * Set the Piece to a rank, some form of class factory
-		 */
+	/*
+	* Set the Piece to a rank, some form of class factory
+	*/
 		
 		switch (rank){
 		case PAWN:
@@ -52,28 +52,31 @@ public class BoardLogic {
 		
 	}
 	
+	/*
+	 * Returns Piece based on coordinate of the board 
+	 */
 	public Piece getPiece(int pos_x, int pos_y){
-		/*
-		 * Returns Piece based on coordinate of the board 
-		 */
 		if (boardPosition[pos_y][pos_x] == null )
 			return null;
 		return boardPosition[pos_y][pos_x];
 	}
 	
+	/*
+	 * Returns Piece Rank based on coordinate of the board 
+	 */
 	public Piece_Rank getRank(int pos_x, int pos_y){
 		if (boardPosition[pos_y][pos_x] == null )
 			return Piece_Rank.EMPTY;
 		return boardPosition[pos_y][pos_x].getRank();
 	}
 	
+	/*
+	 * Setting up the board to the default setup
+	 */
 	public void setupBoard(){
-		/*
-		 * Setting up the board to the default setup
-		 * 
-		 */
 		for ( int i = 0; i < 8; i++ )
 			for ( int j = 0; j < 8; j++ ){
+				//White Setup
 				if (i == 1){
 					boardPosition[i][j] = new Pawn();
 					boardPosition[i][j].setColour(Colour.WHITE);
